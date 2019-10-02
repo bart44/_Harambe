@@ -74,7 +74,7 @@ public class Monkey extends GameObject {
                     if (getBounds().intersects(tmpObj.getBounds())){
                         x += velX * -1f;
                         y += velY * -1f;
-                        game.hp-=5;
+                       // game.hp-=5; //touching walls do not harm
                     }
                 }
 

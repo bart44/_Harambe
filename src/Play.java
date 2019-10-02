@@ -18,7 +18,7 @@ public class Play extends Canvas implements Runnable {
     private BufferedImage floor = null;
 
 
-    public int ammo = 20;
+    public int ammo = 10;
     public int hp = 100;
     public int points = 0;
 
@@ -67,6 +67,22 @@ public class Play extends Canvas implements Runnable {
             }
         }
         handler.tick();
+    }
+
+    public void collectAmmo() {
+        BufferStrategy bs = this.getBufferStrategy();
+        if(bs == null) {
+            this.createBufferStrategy(3); //param - creates 3 frames before showup
+            return;
+        }
+        Graphics g = bs.getDrawGraphics();
+
+        g.setColor(Color.red);
+        g.setFont (myFont);
+        g.drawString("COLLECT AMMO!",920,54);
+        g.dispose();
+        bs.show();
+
     }
 
     public void gameOver() {
@@ -133,6 +149,11 @@ public class Play extends Canvas implements Runnable {
         g.setColor(Color.red);
         g.setFont (myFont);
         g.drawString("Ammo " + ammo,1050,24);
+
+        //collect ammo
+        if(ammo == 0 ) {
+            collectAmmo();
+        }
 
         //game over
         if(hp <= 0 || handler.object.size() == 1312 ) {
